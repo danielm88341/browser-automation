@@ -1,7 +1,12 @@
 /**
- * Fill Function assistant
+ * In Browser Script Fill Function assistant
  *
- * Note: this has to be copied in its entirety.
+ * Designed around Angular/NG selectors, these can be repurposed for other formats (i.e. React, Vue)
+ * To use, create a snippet in your browser's sources section, paste, then call the functions.
+ * Everything is self-contained, and there is presently no means to import external libraries.
+ * It is recommended to create a common config object for commonly changed elements.
+ *
+ * Note: This function class should be generally all you need to function.
  */
 const FillFunctAngular = new function() {
     /**
@@ -12,6 +17,8 @@ const FillFunctAngular = new function() {
     this.setText = function (selString, text) {
         let sel = document.querySelector(selString);
         sel.value = text;
+        // Calling both events because some fields seem to not want to update appropriately.
+        // Shouldn't cause any side effects.
         sel.dispatchEvent(new InputEvent('input', {bubbles: true}));
         sel.dispatchEvent(new Event('blur', {bubbles: true}));
     }
